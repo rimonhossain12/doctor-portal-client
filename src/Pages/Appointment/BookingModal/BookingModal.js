@@ -28,13 +28,13 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
         
     }
     return (
-        <Modal
+        <Modal 
             open={openBooking}
             onClose={handleBookingClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style}>
+            <Box style={{ backgroundColor: 'white' }} sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     {name}
                 </Typography>

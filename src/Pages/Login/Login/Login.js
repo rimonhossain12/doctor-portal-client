@@ -19,6 +19,7 @@ const Login = () => {
         setLoginData(newLoginData);
     }
     const handleLoginSubmit = (e) => {
+        console.log(loginData.email, loginData.password);
         loginUser(loginData.email, loginData.password,location,history)
         e.preventDefault();
     }

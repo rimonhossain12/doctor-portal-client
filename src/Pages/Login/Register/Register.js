@@ -1,5 +1,7 @@
 import { Container, Grid, TextField, Typography, Button, CircularProgress, Alert } from '@mui/material';
 import React, { useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import login from '../../../images/login.png';
@@ -7,12 +9,15 @@ import login from '../../../images/login.png';
 const Register = () => {
     const [loginData, setLoginData] = useState({});
     const {user,registerUser,isLoading,authError} = useAuth()
+    const location = useLocation();
+    const history = useHistory();
 
     const handleOnChange = (e) => {
         const field = e.target.name;
         const value = e.target.value;
         const newLoginData = { ...loginData };
         newLoginData[field] = value;
+        console.log(newLoginData);
         setLoginData(newLoginData);
     }
     const handleLoginSubmit = (e) => {
@@ -20,7 +25,7 @@ const Register = () => {
           alert('Your password not valid');
           return;
       }
-        registerUser(loginData.email, loginData.email);
+        registerUser(loginData.email, loginData.email,location,history);
         e.preventDefault();
     }
 
@@ -37,7 +42,7 @@ const Register = () => {
                             type="email"
                             onChange={handleOnChange}
                         /><br />
-                        <TextField id="standard-basic" label="Your Password"
+                        <TextField /* id="standard-basic" */ label="Your Password"
                             sx={{ width: '75%', m: 1 }}
                             type="password"
                             name="password"
@@ -58,9 +63,8 @@ const Register = () => {
                     </form>}
                     {isLoading && <CircularProgress /> }
                     {user.email && <Alert severity="success">User Created  successfully! </Alert>}
-                    {authError && <Alert severity="error">{authError}</Alert>
-}
-
+                    {authError && <Alert severity="error">{authError}</Alert>}
+                    
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <img src={login} style={{ width: '100%' }} alt="" />
